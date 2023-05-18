@@ -17,5 +17,5 @@ ooe.plot <- function(res) {
   if (length(inter_nodes) > 0) {
     highlight_list <- list(nodes = inter_nodes, fill = "orange")
     graphviz.plot(res, shape = "rectangle", highlight = highlight_list)
-  } else NULL
+  } else {graphviz.plot(res, shape="rectangle")}
 }
