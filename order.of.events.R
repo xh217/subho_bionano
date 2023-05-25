@@ -17,14 +17,19 @@ order.of.events <- function(cplx_list, bpdf, covdf, cplx.event = 1,optimization 
     t.cplx.bp <- t.cplx.bp[, c("V1", "V4")]
     t.cplx.bp$value = 1
     cplx.bp.mtx <- reshape2::dcast(t.cplx.bp, V1 ~ V4)
-    cplx.bp.mtx.cov = merge(cplx.bp.mtx, covdf, by.x = "V1", by.y = "mapID")
-    
-    ## Adding contig coverage to reinforce evidence for each event type
+    if(nrow(covdf)>0){
+    cplx.bp.mtx.cov=merge(cplx.bp.mtx,covdf, by.x="V1", by.y="mapID")
+
+   ## Adding contig coverage to reinforce evidence for each event type
     cplx.bp.mtx.rep <- as.data.frame(lapply(cplx.bp.mtx.cov, rep, round(cplx.bp.mtx.cov$cov)))
-    cplx.bp.mtx.rep = subset(cplx.bp.mtx.rep, select = -c(V1, cov))
-    colnames(cplx.bp.mtx.rep) <- gsub("_", ".", colnames(cplx.bp.mtx.rep))
-    cplx.bp.mtx.rep[, 1:ncol(cplx.bp.mtx.rep)] <- sapply(cplx.bp.mtx.rep[, 1:ncol(cplx.bp.mtx.rep)], as.numeric)
-    
+    cplx.bp.mtx.rep=subset(cplx.bp.mtx.rep, select=-c(V1,cov))
+    colnames( cplx.bp.mtx.rep)<-gsub("_",".",colnames( cplx.bp.mtx.rep))
+    cplx.bp.mtx.rep[, 1:ncol(cplx.bp.mtx.rep)] <- sapply(cplx.bp.mtx.rep[, 1:ncol(cplx.bp.mtx.rep)], as.numeric) 
+    } else {
+  	cplx.bp.mtx.rep<-subset(cplx.bp.mtx, select=-V1)
+  	cplx.bp.mtx.rep[, 1:ncol(cplx.bp.mtx.rep)] <- sapply(cplx.bp.mtx.rep[, 1:ncol(cplx.bp.mtx.rep)], as.numeric)
+    } 
+
     ## Bayesian optimization step to get the tree object.
     if (optimization == "hc") {
       res = hc(cplx.bp.mtx.rep)
