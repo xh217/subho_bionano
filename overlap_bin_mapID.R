@@ -1,7 +1,9 @@
-# Retrieve xmap data with blocks
+# bin the mapping mapID contig with a resolution of 10kb 
 overlap_bin_mapID <- function(genome_bin, xmap, window_size = 10000, ...) {
     library(GenomicRanges)
     library(data.table)
+    
+# read input data    
     genome_bin <-
       read.table(
         genome_bin,
@@ -10,6 +12,8 @@ overlap_bin_mapID <- function(genome_bin, xmap, window_size = 10000, ...) {
         stringsAsFactors = F
       )
     colnames(genome_bin) <- c("chr", "start", "end")
+    
+  # read input data   
     if (exists("xmap", mode = "list")) {
       contig_xmap <- xmap
     } else if (file.exists(xmap)) {
@@ -25,7 +29,8 @@ overlap_bin_mapID <- function(genome_bin, xmap, window_size = 10000, ...) {
     contig_xmap <- contig_xmap[, c("chr", "start", "end", "mapID")]
     contig_xmap$chr <- paste0("chr", contig_xmap$chr)
     contig_xmap[which(contig_xmap$chr == "chr23"), "chr"] = "chrX"
-    ##make overlap
+    
+    # identify overlaps between xmap position and reference bins 
     refGR <-
       makeGRangesFromDataFrame(genome_bin,
                                keep.extra.columns = TRUE,
