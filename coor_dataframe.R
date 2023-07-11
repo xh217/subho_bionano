@@ -1,4 +1,4 @@
-coor_dataframe<-function(coordinates){
+coor_dataframe<-function(coordinates,window=10000){
 matches <- regmatches(coordinates, gregexpr("\\d+", coordinates))[[1]]
 
 # Extract chromosome number and positions for first junction block
