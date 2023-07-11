@@ -7,7 +7,7 @@ first_start_position <- as.numeric(matches[2])*1000
 first_end_position <- as.numeric(matches[2])*1000 + window
 
 # Extract chromosome number and positions for second junction block
-sencond_chromosome <- matches[3]
+second_chromosome <- matches[3]
 second_start_position <- as.numeric(matches[4])*1000
 second_end_position<- as.numeric(matches[4])*1000 + window
 
