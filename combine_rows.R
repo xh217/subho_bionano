@@ -1,6 +1,7 @@
 # Function to combine rows based on shared elements
-combine_rows <- function(data) {
+combine_rows <- function(data,sep = ";") {
   # Initialize a list to store the combined rows
+  tab <- sep
   combined_rows <- list()
   
   # Initialize a vector to keep track of processed rows
@@ -11,7 +12,7 @@ combine_rows <- function(data) {
   	
     if (!processed[i]) {
       # Get the elements from the current row
-      elements <- unlist(strsplit(data[i,], ";"))
+      elements <- unlist(strsplit(data[i,], tab))
       
       # Initialize a vector to store the combined elements
       combined_elements <- elements
@@ -20,7 +21,7 @@ combine_rows <- function(data) {
       for (j in (i + 1):nrow(data)) {
         if (!processed[j]) {
           # Get the elements from the current row being compared
-          compare_elements <- unlist(strsplit(data[j, ], ";"))
+          compare_elements <- unlist(strsplit(data[j, ], tab))
           
           # Check if there are shared elements
           if (any(compare_elements %in% combined_elements)) {
@@ -34,7 +35,7 @@ combine_rows <- function(data) {
       }
       
       # Store the combined row
-      combined_rows[[length(combined_rows) + 1]] <- paste(combined_elements, collapse = ";")
+      combined_rows[[length(combined_rows) + 1]] <- paste(combined_elements, collapse = tab)
     }
   }
   
