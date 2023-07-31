@@ -3,9 +3,9 @@ complex_block_annotation <- function(block,window_size=10000,USCS_gene="TxDb.Hsa
   library(tidyr)
   library(GenomicRanges)
   library("GenomicFeatures")
-  library(USCS_gene)
+  library(TxDb.Hsapiens.UCSC.hg38.knownGene)
   library(org.Hs.eg.db)
-  txdb <- USCS_gene
+  txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
   txdb.gene <-genes(txdb, columns=c("TXCHROM","TXSTART", "TXEND","GENEID","TXNAME"))
   blocks <- as.data.frame(block)
   colnames(blocks) <- "blocks"
