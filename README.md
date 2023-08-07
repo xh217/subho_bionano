@@ -144,14 +144,15 @@ junction_circos_plot(one_complex_ta_cov,link_cut_off = 4)
 
 #### Description
 convert junction bin to a dataframe including the first and second junction positions
-
+```
 coor_dataframe(coordinate,window=10000)
-
+```
 #### Value
 coordinates is the junction bins
 window is the bin size
 
 #### Examples
+```
 junction <- "C7.14419kb.C7.14432kb"
 
 coor_dataframe(junction,window=10000)
@@ -162,61 +163,63 @@ coor_dataframe(junction,window=10000)
 [[2]]
    chr    start      end
 1 chr7 14432000 14442000
-
+```
  
 ### complex_block_annotation
 
 #### Description
 After finding the interesting complex regions, one can proceed to map them to known genes and annotate these bins with complex events
-
+```
 library(tidyr)
 library(GenomicRanges)
 library(GenomicFeatures)
 library(TxDb.Hsapiens.UCSC.hg38.knownGene)
 library(org.Hs.eg.db)
 complex_block_annotation(block,window_size=10000,USCS_gene="TxDb.Hsapiens.UCSC.hg38.knownGene")
-
+```
 #### Value
 block is a dataframe with the complex region bin column
 window is the bin size
 USCS_gene is the reference gene that is utilized 
 
-
 #### Examples
+```
 block<-data(complex_block.txt)
 block_gene<-complex_block_annotation(block,window_size=10000,USCS_gene="TxDb.Hsapiens.UCSC.hg38.knownGene")
 block_gene
 [1] "TPK1"      "ARHGEF35"  "ARHGEF34P"
-
+```
 
 ### combine_rows
 
 #### Description
 Merge rows that have any shared elements
-
+```
 combine_rows(data, sep=';')
-
+```
 #### Value
 data is a dataframe with columns xx
 sep is the seperator for each element and can be modified as needed
 
 #### Examples
+```
 df <- data(df_combine_row.txt)      
 combine_rows(df,sep=';')
-
+```
 ### merge_range
 
 #### Description
 merged SVs that satisfy two criteria: (i) if both breakends of the SVs fall within a 5kb range, and (ii) the SVs share the same type, they are combined into a single SV
-
+```
 merge_range(data)
-
+```
 #### Value
 data is a dataframe with columns "chr1 start1 end1 chr2  start2 end2 BNGTYPE type"
 
 #### Example
+```
 after_merge_range<-do.call(rbind,merge_range(merge_range.txt))
-
+```
 
 
 
