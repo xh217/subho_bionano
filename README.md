@@ -9,12 +9,12 @@ We recommend an R version 3.6.0 or more recent in order to use the package.
 Complex genomic rearrangements are common rare in normal tissues but a majority of the tumor genomes have extensive rearrangements, including complex events. Until other classes of genomic alterations, complex rearrangements in tumors are least characterized due to technological limitations, which has led to debates about their architectures and etiologies. Here, we assess the application of genome-graph concept utilizing deep coverage optical mapping genome sequencing.
 
 ## Availability and Installation
-The development version of svarrange package is available at https://github.com/sjdlabgroup/svarrange and can be installed as
+The development version of omcplr package is available at https://github.com/sjdlabgroup/omcplr and can be installed as
 ```
 install.packages("devtools")
-devtools::install_github("sjdlabgroup/svarrange ",build_vignettes = FALSE )
+devtools::install_github("sjdlabgroup/omcplr",build_vignettes = FALSE )
 ```
-## svarrange workflow
+## omcplr workflow
 
 Step 1. Aligned each mapID contig with the reference genome and binned the mapping mapID contig with a resolution of 10kb 
 
